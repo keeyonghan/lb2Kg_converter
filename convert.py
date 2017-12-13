@@ -16,9 +16,13 @@ def index():
     return html.format(pound=lb, kilo=kg)
 
 @app.route("/convert", methods=['POST'])
-def convert():    
-    lb = request.form["pound"]
-    kg = int(lb) * 4.535923700000001
+def convert():
+    try: 
+        lb = request.form["pound"]
+        kg = int(lb) * 4.535923700000001
+    except:
+        return 'TypeError : Only number please!'
+
     return html.format(pound=lb, kilo=kg)
  
 if __name__ == "__main__":
