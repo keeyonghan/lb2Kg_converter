@@ -1,0 +1,25 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+ 
+html = """
+<center>
+<form action='/convert' method='POST'>
+Pound:<input type='text' name='pound' value='{pound}'> = <span id='kilo'>{kilo}</span><br>
+<input type='submit' value='Submit'>
+</form>
+"""
+@app.route("/")
+def index():
+    lb = 0
+    kg = 0
+    return html.format(pound=lb, kilo=kg)
+
+@app.route("/convert", methods=['POST'])
+def convert():    
+    lb = request.form["pound"]
+    kg = int(lb) * 4.535923700000001
+    return html.format(pound=lb, kilo=kg)
+ 
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=4000)
