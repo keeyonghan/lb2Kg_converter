@@ -5,8 +5,8 @@ app = Flask(__name__)
 html = """
 <center>
 <form action='/convert' method='POST'>
-Pound:<input type='text' name='pound' value='{pound}'> = <span id='kilo'>{kilo}</span><br>
-<input type='submit' value='Submit'>
+Pound:<input type='text' name='pound' value='{pound}'> lb = <span id='kilo'>{kilo}</span> Kg<br>
+<input type='submit' value='Submit'> 
 </form>
 """
 @app.route("/")
@@ -20,8 +20,8 @@ def convert():
     try: 
         lb = request.form["pound"]
         kg = int(lb) * 4.535923700000001
-    except:
-        return 'TypeError : Only number please!'
+    except:                
+        return '<h1 style="color:red;">TypeError : Only number please!</h1>'
 
     return html.format(pound=lb, kilo=kg)
  
